@@ -1,9 +1,28 @@
 import React from "react";
 import { FileUploader } from "react-drag-drop-files";
+import axios from "axios";
 
 const fileTypes = ["JPG", "PNG", "GIF", "JPEG", "TIF"];
 
-export const uploadImage = () => {
+type Props = { appendImage: (url: string) => void };
+export const ImageUploader = ({ appendImage }: Props) => {
+  const handleUploadChange = async (image: any) => {
+    const formData = new FormData();
+    formData.append("image", image);
+    const response = await axios.post(
+      "https://scaldus.serveo.net/api/v1/image",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjg5NjgyODEwLCJleHAiOjE2OTAyODc2MTB9.60PdUb82C0r3IrEiG2sYhRbKhN2o_ajrQsjZ23bhAKX_cvA0fLGkV6F5oj7ehcE8O4gC-VUtkGzj_lscFOboCw`,
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, OPTIONS, POST, PUT",
+        },
+      }
+    );
+    appendImage(response.data.object.imageUrl);
+  };
   return (
     <div>
       <FileUploader
