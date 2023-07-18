@@ -1,12 +1,29 @@
-
+import { useState } from 'react';
+import ReactQuill from "react-quill";
+import EditorToolbar, { modules, formats } from "./editorToolbar";
+import "react-quill/dist/quill.snow.css";
 import './App.css'
 
 export default function App() {
+  const [content, setContent] = useState('');
+
+  const handleChange = (value: string) => {
+    setContent(value);
+    console.log(content);
+  };
   return (
-    <div className='h-10 w-50 bg-indigo-600 rounded-full text-gray-900'>
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-    </div>
+    <div className="text-editor">
+    <EditorToolbar />
+    <ReactQuill
+      theme="snow"
+      value={content}
+      onChange={handleChange}
+      placeholder={"Write something awesome..."}
+      modules={modules}
+      formats={formats}
+    />
+  </div>
   )
 }
+
+
