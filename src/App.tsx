@@ -7,6 +7,7 @@ import "react-quill/dist/quill.snow.css";
 import "./App.css";
 import axios from "axios";
 import { Add } from "./components/add";
+import { DanteEditor } from "dante3";
 
 export type Base = {
   id: number;
@@ -41,13 +42,8 @@ export default function App() {
 
   //   console.log(baseArray);
   return (
-    <div className="text-editor">
-      <QuillComponent />
-
-      <Add
-        handleTextClick={handleTextClick}
-        handleImageAddClick={handleImageAddClick}
-      />
+    <div>
+      <DanteEditor />
     </div>
   );
 }
