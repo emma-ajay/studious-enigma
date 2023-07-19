@@ -5,9 +5,9 @@ import { ImageUploader } from "./components/uploadImage";
 import { FileUploader } from "react-drag-drop-files";
 import "react-quill/dist/quill.snow.css";
 import "./App.css";
-import axios from "axios";
-import { Add } from "./components/add";
-import { DanteEditor } from "dante3";
+import axiosvt from "axios";
+// import DanteEditor from "Dante2";
+import { Dante } from "dante3";
 
 export type Base = {
   id: number;
@@ -43,7 +43,8 @@ export default function App() {
   //   console.log(baseArray);
   return (
     <div>
-      <DanteEditor />
+      {/* <QuillComponent /> */}
+      <Dante />
     </div>
   );
 }

@@ -10,7 +10,7 @@ export const ImageUploader = ({ appendImage }: Props) => {
     const formData = new FormData();
     formData.append("image", image);
     const response = await axios.post(
-      "https://scaldus.serveo.net/api/v1/image",
+      "https://vestri.serveo.net/api/v1/image",
       formData,
       {
         headers: {

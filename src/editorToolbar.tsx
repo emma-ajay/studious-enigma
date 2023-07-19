@@ -1,4 +1,6 @@
 import { Quill } from "react-quill";
+import { ImageActions } from "@xeger/quill-image-actions";
+import { formats, ImageFormats } from "@xeger/quill-image-formats";
 
 // Custom Undo button icon component for Quill editor. You can import it directly
 // from 'quill/assets/icons/undo.svg' but I found that a number of loaders do not
@@ -25,13 +27,13 @@ const CustomRedo = () => (
 );
 
 // Undo and redo functions for Custom Toolbar
-function undoChange(this: {
-    quill: any; undo: () => void; redo: () => void; 
-}) {
+function undoChange(this: { quill: any; undo: () => void; redo: () => void }) {
   this.quill.history.undo();
 }
 function redoChange(this: {
-    quill: any; undo: (this: { quill: any; undo: () => void; redo: () => void; }) => void; redo: () => void; 
+  quill: any;
+  undo: (this: { quill: any; undo: () => void; redo: () => void }) => void;
+  redo: () => void;
 }) {
   this.quill.history.redo();
 }
@@ -40,6 +42,8 @@ function redoChange(this: {
 const Size = Quill.import("formats/size");
 Size.whitelist = ["extra-small", "small", "medium", "large"];
 Quill.register(Size, true);
+Quill.register("modules/imageActions", ImageActions);
+Quill.register("modules/imageFormats", ImageFormats);
 
 // Add fonts to whitelist and register them
 const Font = Quill.import("formats/font");
@@ -49,28 +53,54 @@ Font.whitelist = [
   "courier-new",
   "georgia",
   "helvetica",
-  "lucida"
+  "lucida",
 ];
 Quill.register(Font, true);
+console.log(formats);
 
 // Modules object for setting up the Quill editor
+console.log(formats);
 export const modules = {
+  imageActions: {},
+  imageFormats: {},
   toolbar: {
     container: "#toolbar",
     handlers: {
       undo: undoChange,
-      redo: redoChange
-    }
+      redo: redoChange,
+    },
   },
   history: {
     delay: 500,
     maxStack: 100,
-    userOnly: true
-  }
+    userOnly: true,
+  },
+  //   imageActions: {},
+  //   imageFormats: {},
+  //   toolbar: [
+  //     ["bold", "italic", "underline", "strike"], // toggled buttons
+  //     ["blockquote", "code-block"],
+
+  //     [{ header: 1 }, { header: 2 }], // custom button values
+  //     [{ list: "ordered" }, { list: "bullet" }],
+  //     [{ script: "sub" }, { script: "super" }], // superscript/subscript
+  //     [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+  //     [{ direction: "rtl" }], // text direction
+
+  //     [{ size: ["small", false, "large", "huge"] }], // custom dropdown
+  //     [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+  //     [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+  //     [{ font: [] }],
+  //     [{ align: [] }],
+
+  //     ["clean"],
+  //   ],
 };
 
 // Formats objects for setting up the Quill editor
-export const formats = [
+export const formatter = [
+  // ...formats,
   "header",
   "font",
   "size",
@@ -88,7 +118,7 @@ export const formats = [
   "link",
   "image",
   "color",
-  "code-block"
+  "code-block",
 ];
 
 // Quill Toolbar component

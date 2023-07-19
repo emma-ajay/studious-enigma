@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import ReactQuill from "react-quill";
 import { Base } from "../App";
-import EditorToolbar, { modules, formats } from "../editorToolbar";
+import EditorToolbar, { modules, formatter } from "../editorToolbar";
 import { ImageUploader } from "./uploadImage";
 
 // type Props = {
@@ -15,10 +15,7 @@ export const QuillComponent = () => {
     console.log(value);
   };
   const appendImage = (url: string) => {
-    const srcLink = `<div style="display: flex; justify-content: center; background-color: red;">
-  <img src="${url}" style="align-self: center; width="1700px">
-</div>
-`;
+    const srcLink = `<img src="${url}" style="margin: auto" width: 500px>`;
     setContent((content) => content + srcLink);
     console.log(srcLink);
   };
@@ -32,7 +29,7 @@ export const QuillComponent = () => {
         onChange={handleChange}
         placeholder={"Write something awesome..."}
         modules={modules}
-        formats={formats}
+        formats={formatter}
       />
       <ImageUploader appendImage={appendImage} />
       {/* {base.isImage ? <ImageUploader appendImage={appendImage} /> : null} */}
