@@ -7,7 +7,8 @@ import "react-quill/dist/quill.snow.css";
 import "./App.css";
 import axios from "axios";
 import { Add } from "./components/add";
-import { DanteEditor } from "dante3";
+// import { DanteEditor } from "dante3";
+import MyEditor from "./components/wang-editor/editor";
 
 export type Base = {
   id: number;
@@ -43,7 +44,8 @@ export default function App() {
   //   console.log(baseArray);
   return (
     <div>
-      <DanteEditor />
+      {/* <DanteEditor /> */}
+      <MyEditor />
     </div>
   );
 }
