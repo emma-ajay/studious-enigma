@@ -1,11 +1,17 @@
-import React from "react";
+// import React from "react";
 import { FileUploader } from "react-drag-drop-files";
 import axios from "axios";
 
 const fileTypes = ["JPG", "PNG", "GIF", "JPEG", "TIF"];
 
-type Props = { appendImage: (url: string) => void };
-export const ImageUploader = ({ appendImage }: Props) => {
+type Props = {
+  appendImage?: (url: string) => void;
+  handleUploadChangeProp?: (image: any) => void;
+};
+export const ImageUploader = ({
+  appendImage,
+  handleUploadChangeProp,
+}: Props) => {
   const handleUploadChange = async (image: any) => {
     const formData = new FormData();
     formData.append("image", image);
@@ -21,13 +27,15 @@ export const ImageUploader = ({ appendImage }: Props) => {
         },
       }
     );
-    appendImage(response.data.object.imageUrl);
+    appendImage ? appendImage(response.data.object.imageUrl) : null;
   };
   return (
     <div>
       <FileUploader
         multiple={false}
-        handleChange={handleUploadChange}
+        handleChange={
+          handleUploadChangeProp ? handleUploadChangeProp : handleUploadChange
+        }
         name="image"
         types={fileTypes}
       >

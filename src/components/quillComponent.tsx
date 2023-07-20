@@ -1,6 +1,5 @@
-import { React, useState } from "react";
-import ReactQuill from "react-quill";
-import { Base } from "../App";
+import { useState } from "react";
+
 import EditorToolbar, { modules, formats } from "../editorToolbar";
 import { ImageUploader } from "./uploadImage";
 
@@ -26,14 +25,14 @@ export const QuillComponent = () => {
   return (
     <div>
       <EditorToolbar />
-      <ReactQuill
+      {/* <ReactQuill
         theme="snow"
         value={content}
         onChange={handleChange}
         placeholder={"Write something awesome..."}
         modules={modules}
         formats={formats}
-      />
+      /> */}
       <ImageUploader appendImage={appendImage} />
       {/* {base.isImage ? <ImageUploader appendImage={appendImage} /> : null} */}
     </div>
