@@ -1,10 +1,11 @@
 import "@wangeditor/editor/dist/css/style.css"; // import css
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Editor, Toolbar } from "@wangeditor/editor-for-react";
 import { IDomEditor, IEditorConfig, IToolbarConfig } from "@wangeditor/editor";
 import { ImageUploader } from "../uploadImage";
 import { DraftButton } from "../saveDraft";
+import { PublishButton } from "./components/postPublisher";
 
 function MyEditor() {
   // editor instance
@@ -17,12 +18,6 @@ function MyEditor() {
   const [html, setHtml] = useState("<p>hello</p>");
 
   // Simulate ajax async set html
-
-  //   setTimeout(() => {
-  //     editor?.dangerouslyInsertHtml(
-  //       `<img src="https://media.istockphoto.com/id/1469499027/photo/beautiful-emotional-woman-with-natural-make-up.jpg?s=1024x1024&w=is&k=20&c=Ge-0SHVM0D5P179wvij9EfWcw05FdJ-IJq-pQrhbifM=" alt="sd" data-href="qw" style=""/>`
-  //     );
-  //   }, 30000);
   const appendImage = (url: string) => {
     const srcLink = `<img src="${url}" alt="someAlt" data-href="jb" style=""/>`;
     editor?.dangerouslyInsertHtml(srcLink);
@@ -52,7 +47,7 @@ function MyEditor() {
     server: "https://vestri.serveo.net/api/v1/image",
     headers: {
       "Content-Type": "multipart/form-data",
-      //   Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjg5NjgyODEwLCJleHAiOjE2OTAyODc2MTB9.60PdUb82C0r3IrEiG2sYhRbKhN2o_ajrQsjZ23bhAKX_cvA0fLGkV6F5oj7ehcE8O4gC-VUtkGzj_lscFOboCw`,
+      Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjg5NjgyODEwLCJleHAiOjE2OTAyODc2MTB9.60PdUb82C0r3IrEiG2sYhRbKhN2o_ajrQsjZ23bhAKX_cvA0fLGkV6F5oj7ehcE8O4gC-VUtkGzj_lscFOboCw`,
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, OPTIONS, POST, PUT",
     },
@@ -60,7 +55,6 @@ function MyEditor() {
     // other config...
   };
 
-  console.log(editor?.getMenuConfig("uploadImage"));
   //@ts-ignore
   //   console.log(editorConfig?.MENU_CONF["uploadImage"]);
 
@@ -92,6 +86,7 @@ function MyEditor() {
           style={{ height: "500px", overflowY: "hidden" }}
         />
         <ImageUploader appendImage={appendImage} />
+        <PublishButton content={html} />
       </div>
       <div style={{ marginTop: "15px" }}>{html}</div>
     </>

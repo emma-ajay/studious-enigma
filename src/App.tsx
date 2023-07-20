@@ -18,8 +18,8 @@ export default function App() {
   //   console.log(baseArray);
   return (
     <div>
-      {/* <MyEditor /> */}
-      <PublishScreen />
+      <MyEditor />
+      {/* <PublishScreen /> */}
     </div>
   );
 }

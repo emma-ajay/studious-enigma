@@ -40,11 +40,11 @@ export const PublishForm = () => {
   formData.set("category", values.category);
   console.log(values);
   const options = ["life", "sex", "career", "family"];
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
     formData.set("publishedDate", currentDate.getTime().toString());
     const response = await axios.post(
-      "https://cunctus.serveo.net/api/v1/publish/5/post",
+      "https://cunctus.serveo.net/api/v1/publish/4/post",
       formData,
       {
         headers: {
