@@ -35,12 +35,12 @@ function MyEditor() {
   };
   //@ts-ignore
   editorConfig.MENU_CONF["uploadImage"] = {
-    server: "https://scaldus.serveo.net/api/v1/image",
+    server: "https://vestri.serveo.net/api/v1/image",
     fieldName: "custom-field-name",
     // other config...
   };
 
-  //   console.log(editor?.getMenuConfig("uploadImage"));
+  console.log(editor?.getMenuConfig("uploadImage"));
   //@ts-ignore
   //   console.log(editorConfig?.MENU_CONF["uploadImage"]);
 
