@@ -3,9 +3,10 @@ import "@wangeditor/editor/dist/css/style.css"; // import css
 import { useState, useEffect } from "react";
 import { Editor, Toolbar } from "@wangeditor/editor-for-react";
 import { IDomEditor, IEditorConfig, IToolbarConfig } from "@wangeditor/editor";
-import { ImageUploader } from "../uploadImage";
-import { DraftButton } from "../saveDraft";
+import { ImageUploader } from "../../components/uploadImage";
+import { DraftButton } from "../../components/saveDraft";
 import { PublishButton } from "./components/postPublisher";
+import { Link } from "react-router-dom";
 
 function MyEditor() {
   // editor instance
@@ -86,6 +87,7 @@ function MyEditor() {
           style={{ height: "500px", overflowY: "hidden" }}
         />
         <ImageUploader appendImage={appendImage} />
+
         <PublishButton content={html} />
       </div>
       <div style={{ marginTop: "15px" }}>{html}</div>

@@ -7,8 +7,9 @@ import "react-quill/dist/quill.snow.css";
 import "./App.css";
 import axios from "axios";
 import { Add } from "./components/add";
-import MyEditor from "./components/wang-editor/editor";
+import MyEditor from "./screens/EditScreen/editor";
 import { PublishScreen } from "./screens/PublishScreen";
+import { Outlet } from "react-router";
 
 export default function App() {
   //   const [baseArray, setBaseArray] = useState<Base[]>([
@@ -18,8 +19,8 @@ export default function App() {
   //   console.log(baseArray);
   return (
     <div>
-      <MyEditor />
-      {/* <PublishScreen /> */}
+      <p>"An application"</p>
+      <Outlet />
     </div>
   );
 }
