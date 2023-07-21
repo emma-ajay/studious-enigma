@@ -26,6 +26,7 @@ export const DraftScreen = () => {
         setTotalPages(response.data.totalPages);
         return response.data.content;
       })
+
       .catch((error) => console.log(error));
 
   const handlePageChange = (data: { selected: number }) => {

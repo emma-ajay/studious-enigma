@@ -112,6 +112,17 @@ export const PublishForm = () => {
           }}
         />
         <input
+          placeholder="description"
+          value={values.description}
+          onChange={(event) => {
+            const text = event.target.value;
+            setValues((values) => ({
+              ...values,
+              description: text,
+            }));
+          }}
+        />
+        <input
           placeholder="Blurb"
           value={values.blurb}
           onChange={(event) => {
