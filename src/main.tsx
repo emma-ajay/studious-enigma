@@ -5,6 +5,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import { PublishScreen } from "./screens/PublishScreen";
 import MyEditor from "./screens/EditScreen/editor";
+import { DraftScreen } from "./screens/DraftScreen";
+import { SignUp } from "./screens/Account/SignUp";
+import { Otp } from "./screens/Account/SignUp/Otp";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +22,23 @@ const router = createBrowserRouter([
         path: "/publish/:postId",
         element: <PublishScreen />,
       },
+      {
+        path: "/drafts",
+        element: <DraftScreen />,
+      },
     ],
+  },
+  {
+    path: "/accounts/signup",
+    element: <SignUp />,
+  },
+  {
+    path: "/accounts/:userMail/verify",
+    element: <Otp />,
+  },
+  {
+    path: "/accounts/login",
+    element: <div>Login</div>,
   },
 ]);
 

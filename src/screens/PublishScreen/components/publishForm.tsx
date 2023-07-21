@@ -64,7 +64,7 @@ export const PublishForm = () => {
     formData.set("publishedDate", currentDate.getTime().toString());
     const response = axios
       .post(
-        `https://cunctus.serveo.net/api/v1/publish/${postId}/post`,
+        `https://multi.serveo.net/api/v1/publish/${postId}/post`,
         formData,
         {
           headers: {
