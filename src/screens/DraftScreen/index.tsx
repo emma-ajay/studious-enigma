@@ -10,7 +10,7 @@ export const DraftScreen = () => {
   const size = 2;
 
   useEffect(() => {
-    API.get(`api/v1/draft/user?page=1&size=${size}`)
+    API.get(`api/v1/draft/user?page=0&size=${size}`)
       .then((response) => {
         console.log(response);
         setTotalPages(response.data.totalPages);
@@ -30,7 +30,7 @@ export const DraftScreen = () => {
 
   const handlePageChange = (data: { selected: number }) => {
     console.log("df");
-    getPages(2)
+    getPages(data.selected)
       .then((page) => {
         // setDrafts(page);
       })
@@ -40,7 +40,7 @@ export const DraftScreen = () => {
   return (
     <div>
       {drafts.map((draft, index) => (
-        <Draft number={index + 1} draft={draft} />
+        <Draft number={index + 1} draft={draft} key={draft.draftId} />
       ))}
       <ReactPaginate
         previousLabel={"<<"}

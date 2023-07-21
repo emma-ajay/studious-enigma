@@ -12,6 +12,7 @@ interface IPublishFormValues {
   thumbnail: any;
   blurb: string;
   title: string;
+  description: string;
   publishedDate: string;
   category: string;
 }
@@ -24,6 +25,7 @@ export const PublishForm = () => {
     thumbnail: "",
     blurb: "",
     title: "",
+    description: "",
     publishedDate: "",
     category: "",
   });
@@ -33,6 +35,7 @@ export const PublishForm = () => {
     if (
       values.thumbnail !== "" &&
       values.blurb !== "" &&
+      values.title !== "" &&
       values.title !== "" &&
       //   values.publishedDate !== "" &&
       values.category !== ""
@@ -54,6 +57,7 @@ export const PublishForm = () => {
 
   formData.set("blurb", values.blurb);
   formData.set("title", values.title);
+  formData.set("description", values.description);
   formData.set("publishedDate", values.publishedDate);
   formData.set("category", values.category);
   //   console.log(values);
