@@ -5,6 +5,7 @@ import { ImageUploader } from "../../../components/uploadImage";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import axios from "axios";
+import { useParams } from "react-router";
 
 interface IPublishFormValues {
   thumbnail: any;
@@ -15,7 +16,9 @@ interface IPublishFormValues {
 }
 const formData = new FormData();
 export const PublishForm = () => {
+  const { postId } = useParams();
   const [file, setFile] = useState<string>("");
+  const [inFlight, setInFlight] = useState<boolean>(false);
   const [values, setValues] = useState<IPublishFormValues>({
     thumbnail: "",
     blurb: "",
@@ -24,6 +27,20 @@ export const PublishForm = () => {
     category: "",
   });
   const currentDate = new Date();
+
+  const submitReady = () => {
+    if (
+      values.thumbnail !== "" &&
+      values.blurb !== "" &&
+      values.title !== "" &&
+      values.publishedDate !== "" &&
+      values.category !== ""
+    ) {
+      return true;
+    }
+
+    return false;
+  };
 
   const handleImageUpload = (image: any) => {
     formData.set("thumbnail", image);
@@ -38,24 +55,31 @@ export const PublishForm = () => {
   formData.set("title", values.title);
   formData.set("publishedDate", values.publishedDate);
   formData.set("category", values.category);
-  console.log(values);
+  //   console.log(values);
   const options = ["life", "sex", "career", "family"];
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = (event: any) => {
+    console.log(values.title);
     event.preventDefault();
+    setInFlight(true);
     formData.set("publishedDate", currentDate.getTime().toString());
-    const response = await axios.post(
-      "https://cunctus.serveo.net/api/v1/publish/4/post",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjg5NjgyODEwLCJleHAiOjE2OTAyODc2MTB9.60PdUb82C0r3IrEiG2sYhRbKhN2o_ajrQsjZ23bhAKX_cvA0fLGkV6F5oj7ehcE8O4gC-VUtkGzj_lscFOboCw`,
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, OPTIONS, POST, PUT",
-        },
-      }
-    );
-    console.log(response);
+    const response = axios
+      .post(
+        `https://cunctus.serveo.net/api/v1/publish/${postId}/post`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjg5NjgyODEwLCJleHAiOjE2OTAyODc2MTB9.60PdUb82C0r3IrEiG2sYhRbKhN2o_ajrQsjZ23bhAKX_cvA0fLGkV6F5oj7ehcE8O4gC-VUtkGzj_lscFOboCw`,
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, OPTIONS, POST, PUT",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => console.log(error))
+      .finally(() => setInFlight(false));
   };
   return (
     <div>
@@ -104,7 +128,7 @@ export const PublishForm = () => {
             }));
           }}
         />
-        <input type="submit" />
+        <input type="submit" disabled={inFlight || !submitReady()} />
       </form>
     </div>
   );
