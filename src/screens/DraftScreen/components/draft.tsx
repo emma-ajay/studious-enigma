@@ -14,10 +14,12 @@ type Props = {
 };
 
 export const Draft = ({ number, draft }: Props) => {
+  const modifiedDate = new Date(parseInt(draft.lastModifiedDate));
+  console.log(modifiedDate);
   return (
     <div className="bg-gray-500 mt-3">
       <Link to={`/edit/${draft.draftId}`}>
-        Draft {number} ({draft.lastModifiedDate})
+        Draft {number + 1} ({modifiedDate.toDateString()})
       </Link>
     </div>
   );

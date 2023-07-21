@@ -7,6 +7,7 @@ import { IDraft } from "./components/draft";
 export const DraftScreen = () => {
   const [drafts, setDrafts] = useState<IDraft[]>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(0);
   const size = 2;
 
   useEffect(() => {
@@ -22,6 +23,8 @@ export const DraftScreen = () => {
   const getPages = (currentPage: number) =>
     API.get(`api/v1/draft/user?page=${currentPage}&size=${size}`)
       .then((response) => {
+        console.log(response);
+        setCurrentPage(currentPage);
         setDrafts(response.data.content);
         setTotalPages(response.data.totalPages);
         return response.data.content;
@@ -37,11 +40,15 @@ export const DraftScreen = () => {
       })
       .catch((err) => console.log(err));
   };
-
+  console.log(drafts);
   return (
     <div>
       {drafts.map((draft, index) => (
-        <Draft number={index + 1} draft={draft} key={draft.draftId} />
+        <Draft
+          number={size * currentPage + index}
+          draft={draft}
+          key={draft.draftId}
+        />
       ))}
       <ReactPaginate
         previousLabel={"<<"}
