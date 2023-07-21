@@ -6,9 +6,12 @@ import { IDomEditor, IEditorConfig, IToolbarConfig } from "@wangeditor/editor";
 import { ImageUploader } from "../../components/uploadImage";
 import { DraftButton } from "./components/saveDraft";
 import { PublishButton } from "./components/postPublisher";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { API } from "../../controllers/API";
+import axios from "axios";
 
 function MyEditor() {
+  const { draftId } = useParams();
   // editor instance
   const [editor, setEditor] = useState<IDomEditor | null>(null);
 
@@ -16,18 +19,13 @@ function MyEditor() {
   //   // const [editor, setEditor] = useState(null)                  // JS syntax
 
   // editor content
-  const [html, setHtml] = useState("<p>hello</p>");
+  const [html, setHtml] = useState(() => (draftId ? null : "<p>hello</p>"));
 
   // Simulate ajax async set html
   const appendImage = (url: string) => {
     const srcLink = `<img src="${url}" alt="someAlt" data-href="jb" style=""/>`;
     editor?.dangerouslyInsertHtml(srcLink);
   };
-  useEffect(() => {
-    setTimeout(() => {
-      setHtml("<p>hello&nbsp;world</p>");
-    }, 1500);
-  }, []);
 
   // change `uploadImage` menu config
 
@@ -61,6 +59,16 @@ function MyEditor() {
 
   // Timely destroy editor, important!
   useEffect(() => {
+    if (draftId) {
+      API.get(`/api/v1/draft/${draftId}`).then((response) => {
+        axios
+          .get(response.data.object.content)
+          .then((response) => {
+            setHtml(response.data);
+          })
+          .catch((error) => console.log(error));
+      });
+    }
     return () => {
       if (editor == null) return;
       editor.destroy();
@@ -71,7 +79,7 @@ function MyEditor() {
   return (
     <>
       <div style={{ border: "1px solid #ccc", zIndex: 100 }}>
-        <DraftButton />
+        <DraftButton content={html} />
         <Toolbar
           editor={editor}
           defaultConfig={toolbarConfig}

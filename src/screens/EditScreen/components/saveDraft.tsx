@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import axios from "axios";
 import { API } from "../../../controllers/API";
 import { useNavigate } from "react-router";
@@ -8,10 +8,17 @@ type Props = {
 };
 
 export const DraftButton = ({ content }: Props) => {
-  const navigate = useNavigate;
+  const currentDate = new Date();
+  const timestamp = currentDate.getTime();
+
+  const navigate = useNavigate();
   const handleClick = () => {
-    API.post(`/api/v1/draft`, content)
+    API.post(`/api/v1/draft`, {
+      content: content,
+      lastModifiedDate: timestamp,
+    })
       .then((response: any) => {
+        console.log(response);
         navigate(`/drafts`);
       })
       .catch((error) => {

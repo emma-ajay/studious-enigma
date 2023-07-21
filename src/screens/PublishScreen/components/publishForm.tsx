@@ -6,6 +6,7 @@ import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import axios from "axios";
 import { useParams } from "react-router";
+import { UploadAPI } from "../../../controllers/API";
 
 interface IPublishFormValues {
   thumbnail: any;
@@ -33,7 +34,7 @@ export const PublishForm = () => {
       values.thumbnail !== "" &&
       values.blurb !== "" &&
       values.title !== "" &&
-      values.publishedDate !== "" &&
+      //   values.publishedDate !== "" &&
       values.category !== ""
     ) {
       return true;
@@ -56,25 +57,24 @@ export const PublishForm = () => {
   formData.set("publishedDate", values.publishedDate);
   formData.set("category", values.category);
   //   console.log(values);
-  const options = ["life", "sex", "career", "family"];
+  const options = ["Design", "ux", "Tech", "Lifestyle", "Skincare", "Food"];
   const handleSubmit = (event: any) => {
     console.log(values.title);
     event.preventDefault();
     setInFlight(true);
     formData.set("publishedDate", currentDate.getTime().toString());
-    const response = axios
-      .post(
-        `https://multi.serveo.net/api/v1/publish/${postId}/post`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjg5NjgyODEwLCJleHAiOjE2OTAyODc2MTB9.60PdUb82C0r3IrEiG2sYhRbKhN2o_ajrQsjZ23bhAKX_cvA0fLGkV6F5oj7ehcE8O4gC-VUtkGzj_lscFOboCw`,
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, OPTIONS, POST, PUT",
-          },
-        }
-      )
+    const response = UploadAPI.post(
+      `/api/v1/publish/${postId}/post`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjg5NjgyODEwLCJleHAiOjE2OTAyODc2MTB9.60PdUb82C0r3IrEiG2sYhRbKhN2o_ajrQsjZ23bhAKX_cvA0fLGkV6F5oj7ehcE8O4gC-VUtkGzj_lscFOboCw`,
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, OPTIONS, POST, PUT",
+        },
+      }
+    )
       .then((response) => {
         console.log(response);
       })
