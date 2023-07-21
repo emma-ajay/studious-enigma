@@ -8,6 +8,7 @@ import MyEditor from "./screens/EditScreen/editor";
 import { DraftScreen } from "./screens/DraftScreen";
 import { SignUp } from "./screens/Account/SignUp";
 import { Otp } from "./screens/Account/SignUp/Otp";
+import { Login } from "./screens/Account/LogIn";
 
 const router = createBrowserRouter([
   {
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/accounts/login",
-    element: <div>Login</div>,
+    element: <Login />,
   },
 ]);
 

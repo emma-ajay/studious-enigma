@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Editor, Toolbar } from "@wangeditor/editor-for-react";
 import { IDomEditor, IEditorConfig, IToolbarConfig } from "@wangeditor/editor";
 import { ImageUploader } from "../../components/uploadImage";
-import { DraftButton } from "../../components/saveDraft";
+import { DraftButton } from "./components/saveDraft";
 import { PublishButton } from "./components/postPublisher";
 import { Link } from "react-router-dom";
 

@@ -1,15 +1,6 @@
-import { useState } from "react";
-import { QuillComponent } from "./components/quillComponent";
-import EditorToolbar, { modules, formats } from "./editorToolbar";
-import { ImageUploader } from "./components/uploadImage";
-import { FileUploader } from "react-drag-drop-files";
-import "react-quill/dist/quill.snow.css";
+import { useState, useEffect } from "react";
 import "./App.css";
-import axios from "axios";
-import { Add } from "./components/add";
-import MyEditor from "./screens/EditScreen/editor";
-import { PublishScreen } from "./screens/PublishScreen";
-import { Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 
 export default function App() {
   //   const [baseArray, setBaseArray] = useState<Base[]>([
@@ -17,6 +8,18 @@ export default function App() {
   //   ]);
 
   //   console.log(baseArray);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("Token");
+    const tokenExpired = token
+      ? new Date().getTime() > JSON.parse(atob(token.split(".")[1])).exp * 1000
+      : true;
+
+    if (!token || tokenExpired) {
+      navigate("/login");
+    }
+  }, [navigate]);
   return (
     <div>
       <p>"An application"</p>
