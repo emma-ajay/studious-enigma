@@ -46,33 +46,47 @@ export const Login = () => {
   };
 
   return (
-    <div>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validation}
-        onSubmit={handleSubmit}
-      >
-        {(formikProps) => {
-          return (
-            <Form>
-              <Input name="email" label="Email:" type="text" required />
-              <Input
-                name="password"
-                label="Password:"
-                type="password"
-                required
-              />
-              <button
-                disabled={formikProps.isSubmitting}
-                type="submit"
-                className="mt-4 px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-              >
-                Submit
-              </button>
-            </Form>
-          );
-        }}
-      </Formik>
+    <div className="flex justify-center items-center h-screen">
+      <div className=" flex flex-col w-1/3 justify-between">
+        <div>
+          <p className="text-2xl text-left">
+            Let's create magic that reaches the whole world
+          </p>
+        </div>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validation}
+          onSubmit={handleSubmit}
+        >
+          {(formikProps) => {
+            return (
+              <Form>
+                <Input
+                  name="email"
+                  label="Email:"
+                  type="text"
+                  placeholder="Email Address"
+                  required
+                />
+                <Input
+                  name="password"
+                  label="Password:"
+                  type="password"
+                  placeholder="Password"
+                  required
+                />
+                <button
+                  disabled={formikProps.isSubmitting}
+                  type="submit"
+                  className="mt-4 px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+                >
+                  Submit
+                </button>
+              </Form>
+            );
+          }}
+        </Formik>
+      </div>
     </div>
   );
 };

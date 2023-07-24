@@ -3,6 +3,7 @@ import { Field, ErrorMessage } from "formik";
 
 interface CustomInputProps {
   name: string;
+  placeholder: string;
   type: string;
   required: boolean;
   label: string;
@@ -15,6 +16,7 @@ export const Input = ({
   required,
   label,
   style,
+  placeholder,
 }: CustomInputProps) => {
   return (
     <div style={style}>
@@ -22,6 +24,7 @@ export const Input = ({
       <Field
         type={type}
         name={name}
+        placeholder={placeholder}
         required={required}
         style={{
           width: "100%",

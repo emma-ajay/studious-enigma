@@ -9,11 +9,19 @@ import { PublishButton } from "./components/postPublisher";
 import { Link, useParams } from "react-router-dom";
 import { API } from "../../controllers/API";
 import axios from "axios";
+import { DomEditor } from "@wangeditor/editor";
+import { i18nChangeLanguage } from "@wangeditor/editor";
+
+// Switch language - 'en' or 'zh-CN'
 
 function MyEditor() {
   const { draftId } = useParams();
+  i18nChangeLanguage("en");
   // editor instance
   const [editor, setEditor] = useState<IDomEditor | null>(null);
+
+  const toolbar = DomEditor.getToolbar(editor as IDomEditor);
+  //   console.log("message", toolbar?.getConfig());
 
   // TS syntax
   //   // const [editor, setEditor] = useState(null)                  // JS syntax
