@@ -8,10 +8,12 @@ const fileTypes = ["JPG", "PNG", "GIF", "JPEG", "TIF"];
 type Props = {
   appendImage?: (url: string) => void;
   handleUploadChangeProp?: (image: any) => void;
+  publish?: boolean;
 };
 export const ImageUploader = ({
   appendImage,
   handleUploadChangeProp,
+  publish
 }: Props) => {
   const handleUploadChange = async (image: any) => {
     const formData = new FormData();
@@ -36,6 +38,12 @@ export const ImageUploader = ({
         name="image"
         types={fileTypes}
       >
+        {publish ? 
+        <div className="w-full h-[250px] bg-[#eeeeee] rounded flex flex-col justify-center mb-4">
+          <p className="mx-auto mb-1">Click to Upload Image</p>
+          <p className="w-3/4 mx-auto text-sm text-[#828282]">Include a high-quality image in your story to make it more inviting to readers.</p>
+        </div>
+        :
         <button className="bg-[#3838F3] hover:bg-[#000088] py-7 px-10 mb-8 flex items-center justify-center text-3xl font-bold text-white rounded-[20px] w-full">
           <svg
             className="me-4"
@@ -51,7 +59,7 @@ export const ImageUploader = ({
             />
           </svg>
           Upload Image
-        </button>
+        </button>}
       </FileUploader>
     </div>
   );
