@@ -8,25 +8,45 @@ const fileTypes = ["JPG", "PNG", "GIF", "JPEG", "TIF"];
 type Props = {
   appendImage?: (url: string) => void;
   handleUploadChangeProp?: (image: any) => void;
+<<<<<<< HEAD
   publish?: boolean;
+=======
+  hideButton?: () => void;
+  xyPosition?: {
+    x: number;
+    y: number;
+  };
+>>>>>>> 111797d (temp)
 };
 export const ImageUploader = ({
   appendImage,
   handleUploadChangeProp,
+<<<<<<< HEAD
   publish
+=======
+  hideButton,
+>>>>>>> 111797d (temp)
 }: Props) => {
   const handleUploadChange = async (image: any) => {
     const formData = new FormData();
     formData.append("image", image);
-    const response = await UploadAPI.post("/api/v1/image", formData, {
+    const response = UploadAPI.post("/api/v1/image", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjg5NjgyODEwLCJleHAiOjE2OTAyODc2MTB9.60PdUb82C0r3IrEiG2sYhRbKhN2o_ajrQsjZ23bhAKX_cvA0fLGkV6F5oj7ehcE8O4gC-VUtkGzj_lscFOboCw`,
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, OPTIONS, POST, PUT",
       },
-    });
-    appendImage ? appendImage(response.data.object.imageUrl) : null;
+    })
+      .then((response) => {
+        appendImage ? appendImage(response.data.object.imageUrl) : null;
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        hideButton ? hideButton() : console.log("false empty");
+      });
   };
   return (
     <div>
@@ -38,6 +58,7 @@ export const ImageUploader = ({
         name="image"
         types={fileTypes}
       >
+<<<<<<< HEAD
         {publish ? 
         <div className="w-full h-[250px] bg-[#eeeeee] rounded flex flex-col justify-center mb-4">
           <p className="mx-auto mb-1">Click to Upload Image</p>
@@ -45,6 +66,13 @@ export const ImageUploader = ({
         </div>
         :
         <button className="bg-[#3838F3] hover:bg-[#000088] py-7 px-10 mb-8 flex items-center justify-center text-3xl font-bold text-white rounded-[20px] w-full">
+=======
+        <button
+          className={`bg-[#3838F3] hover:bg-[#000088]  text-white flex items-center justify-center px-3 ${
+            hideButton ? null : `py-7 mb-8 text-3xl font-bold rounded-[20px]`
+          }`}
+        >
+>>>>>>> 111797d (temp)
           <svg
             className="me-4"
             width="50"

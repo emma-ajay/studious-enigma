@@ -19,7 +19,8 @@ function MyEditor() {
   i18nChangeLanguage("en");
   // editor instance
   const [editor, setEditor] = useState<IDomEditor | null>(null);
-
+  const [showContext, setShowContext] = useState<boolean>(false);
+  const [xyPosition, setxyPosition] = useState<any>(false);
   const toolbar = DomEditor.getToolbar(editor as IDomEditor);
   //   console.log("message", toolbar?.getConfig());
 
@@ -40,6 +41,17 @@ function MyEditor() {
   const toolbarConfig: Partial<IToolbarConfig> = {}; // TS syntax
   // const toolbarConfig = { }
   // JS syntax
+
+  toolbarConfig.excludeKeys = ["fontFamily", "lineHeight"];
+
+  //   toolbarConfig.insertKeys = {
+  //     index: 1,
+  //     {
+  //        iconSvg: '<svg viewBox="0 0 1024 1024"><path d="M204.8 505.6m-76.8 0a76.8 76.8 0 1 0 153.6 0 76.8 76.8 0 1 0-153.6 0Z"></path><path d="M505.6 505.6m-76.8 0a76.8 76.8 0 1 0 153.6 0 76.8 76.8 0 1 0-153.6 0Z"></path><path d="M806.4 505.6m-76.8 0a76.8 76.8 0 1 0 153.6 0 76.8 76.8 0 1 0-153.6 0Z"></path></svg>',
+  //        k
+  //     }
+
+  //   }
 
   const editorConfig: Partial<IEditorConfig> = {
     // TS syntax
@@ -84,9 +96,32 @@ function MyEditor() {
     };
   }, [editor]);
 
+  const handleRightClick = (event: any) => {
+    // event.preventDefault();
+    setShowContext(false);
+
+    const positionChange = {
+      x: event.pageX,
+      y: event.pageY,
+    };
+    console.log(event.pageX);
+    setxyPosition(positionChange);
+    setShowContext(true);
+  };
+
+  const hideContext = () => {
+    console.log("fre");
+    setShowContext(false);
+  };
+
   return (
     <>
-      <div style={{ border: "1px solid #ccc", zIndex: 100 }}>
+      <div
+        style={{ border: "1px solid #ccc", zIndex: 100 }}
+        // onContextMenu={handleRightClick}
+        onClick={handleRightClick}
+        className="relative"
+      >
         <DraftButton content={html} />
         <Toolbar
           editor={editor}
@@ -94,17 +129,38 @@ function MyEditor() {
           mode="default"
           style={{ borderBottom: "1px solid #ccc" }}
         />
-        <Editor
-          defaultConfig={editorConfig}
-          value={html}
-          onCreated={setEditor}
-          onChange={(editor) => setHtml(editor.getHtml())}
-          mode="default"
-          style={{ height: "500px", overflowY: "hidden" }}
-        />
+        <div>
+          {" "}
+          {showContext && (
+            <ul
+              className="rightClick absolute top-0 left-0"
+              style={{
+                top: xyPosition.y,
+                left: xyPosition.x,
+                // transform: "translateX(-50%)",
+                // transform: "translateY(-50%)",
+              }}
+            >
+              <li>Some Item</li>
+              <li>
+                <ImageUploader
+                  appendImage={appendImage}
+                  hideButton={hideContext}
+                  xyPosition={xyPosition}
+                />
+              </li>
+            </ul>
+          )}
+          <Editor
+            defaultConfig={editorConfig}
+            value={html}
+            onCreated={setEditor}
+            onChange={(editor) => setHtml(editor.getHtml())}
+            mode="default"
+            style={{ height: "500px", overflowY: "hidden" }}
+          />
+        </div>
         <ImageUploader appendImage={appendImage} />
-
-        <PublishButton content={html} />
       </div>
       <div style={{ marginTop: "15px" }}>{html}</div>
     </>
