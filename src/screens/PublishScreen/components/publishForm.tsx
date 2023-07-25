@@ -31,6 +31,8 @@ export const PublishForm = () => {
   });
   const currentDate = new Date();
 
+  const user:(string | null) = JSON.parse(localStorage.getItem("UserName"))
+
   const submitReady = () => {
     if (
       values.thumbnail !== "" &&
@@ -61,7 +63,7 @@ export const PublishForm = () => {
   formData.set("publishedDate", values.publishedDate);
   formData.set("category", values.category);
   //   console.log(values);
-  const options = ["Design", "ux", "Tech", "Lifestyle", "Skincare", "Food"];
+  const options = ["Design", "UX", "Tech", "Lifestyle", "Skincare", "Food"];
   const handleSubmit = (event: any) => {
     console.log(values.title);
     event.preventDefault();
@@ -86,8 +88,10 @@ export const PublishForm = () => {
       .finally(() => setInFlight(false));
   };
   return (
-    <div>
-      <p>Story Preview</p>
+    <div className="max-w-5xl mx-auto">
+      <form className="grid grid-cols-2 gap-20 place-content-center h-[80vh]" onSubmit={handleSubmit}>
+      <div>
+      <h1 className="font-bold mb-2 text-left text-lg">Story Preview</h1>
       <ImageUploader handleUploadChangeProp={handleImageUpload} />
       {values.thumbnail ? (
         <div className="flex flex-row items-center w-full h-full justify-center space-x-10">
@@ -98,10 +102,9 @@ export const PublishForm = () => {
       ) : (
         <div></div>
       )}
-
-      <form onSubmit={handleSubmit}>
         <input
-          placeholder="title"
+          className="block border-b-[1px] border-[#828282] w-full mb-4"
+          placeholder="Title"
           value={values.title}
           onChange={(event) => {
             const text = event.target.value;
@@ -112,7 +115,8 @@ export const PublishForm = () => {
           }}
         />
         <input
-          placeholder="description"
+          className="block border-b-[1px] border-[#828282] w-full mb-4"
+          placeholder="Description"
           value={values.description}
           onChange={(event) => {
             const text = event.target.value;
@@ -123,6 +127,7 @@ export const PublishForm = () => {
           }}
         />
         <input
+          className="block border-b-[1px] border-[#828282] w-full mb-4"
           placeholder="Blurb"
           value={values.blurb}
           onChange={(event) => {
@@ -133,7 +138,13 @@ export const PublishForm = () => {
             }));
           }}
         />
+      </div>
+      <div>
+        <p className="mb-4 text-left font-medium">Publishing to: <span className="font-bold">{user}</span></p>
+        <p className="text-left mb-3 text-base font-medium text-[#808080]">Add or change topics (up to 5) so readers know what your story is about</p>
         <Dropdown
+          className="border-2 text-left"
+          placeholder={'Add a topic...'}
           options={options}
           value={values.category}
           onChange={(option) => {
@@ -143,7 +154,8 @@ export const PublishForm = () => {
             }));
           }}
         />
-        <input type="submit" disabled={inFlight || !submitReady()} />
+        <input type="submit" value={'Publish now'} className="bg-[#FF86A5] py-2 px-4 mt-10 rounded-full text-white" disabled={inFlight || !submitReady()} />
+      </div>
       </form>
     </div>
   );
