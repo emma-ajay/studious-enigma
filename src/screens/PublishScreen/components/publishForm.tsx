@@ -31,7 +31,7 @@ export const PublishForm = () => {
   });
   const currentDate = new Date();
 
-  const user:(string | null) = JSON.parse(localStorage.getItem("UserName"))
+  const user: string | null = JSON.parse(localStorage.getItem("UserName"));
 
   const submitReady = () => {
     if (
@@ -89,74 +89,94 @@ export const PublishForm = () => {
   };
   return (
     <div className="max-w-5xl mx-auto">
-      <form className="grid grid-cols-2 gap-20 place-content-center h-[80vh]" onSubmit={handleSubmit}>
-      <div>
-      <h1 className="font-bold mb-2 text-left text-lg">Story Preview</h1>
-      <ImageUploader handleUploadChangeProp={handleImageUpload} publish={true} />
-      {values.thumbnail ? (
-        <div className="flex flex-row items-center w-full h-full justify-center space-x-10">
-          <div className="w-1/2">
-            <img src={file} alt="" className="w-3/4" />
-          </div>
+      <form
+        className="grid grid-cols-2 gap-20 place-content-center h-[80vh]"
+        onSubmit={handleSubmit}
+      >
+        <div>
+          <h1 className="font-bold mb-2 text-left text-lg">Story Preview</h1>
+          <ImageUploader
+            handleUploadChangeProp={handleImageUpload}
+            publish={true}
+          />
+          {values.thumbnail ? (
+            <div className="flex flex-row items-center w-full h-full justify-center space-x-10">
+              <div className="w-1/2">
+                <img src={file} alt="" className="w-3/4" />
+              </div>
+            </div>
+          ) : (
+            <div></div>
+          )}
+          <input
+            className="block border-b-[1px] border-[#828282] py-1 w-full mb-4 outline-none"
+            placeholder="Title"
+            value={values.title}
+            onChange={(event) => {
+              const text = event.target.value;
+              setValues((values) => ({
+                ...values,
+                title: text,
+              }));
+            }}
+          />
+          <input
+            className="block border-b-[1px] border-[#828282] py-1 w-full mb-4 outline-none"
+            placeholder="Description"
+            value={values.description}
+            onChange={(event) => {
+              const text = event.target.value;
+              setValues((values) => ({
+                ...values,
+                description: text,
+              }));
+            }}
+          />
+          <input
+            className="block border-b-[1px] border-[#828282] py-1 w-full mb-4 outline-none"
+            placeholder="Blurb"
+            value={values.blurb}
+            onChange={(event) => {
+              const text = event.target.value;
+              setValues((values) => ({
+                ...values,
+                blurb: text,
+              }));
+            }}
+          />
         </div>
-      ) : (
-        <div></div>
-      )}
-        <input
-          className="block border-b-[1px] border-[#828282] py-1 w-full mb-4 outline-none"
-          placeholder="Title"
-          value={values.title}
-          onChange={(event) => {
-            const text = event.target.value;
-            setValues((values) => ({
-              ...values,
-              title: text,
-            }));
-          }}
-        />
-        <input
-          className="block border-b-[1px] border-[#828282] py-1 w-full mb-4 outline-none"
-          placeholder="Description"
-          value={values.description}
-          onChange={(event) => {
-            const text = event.target.value;
-            setValues((values) => ({
-              ...values,
-              description: text,
-            }));
-          }}
-        />
-        <input
-          className="block border-b-[1px] border-[#828282] py-1 w-full mb-4 outline-none"
-          placeholder="Blurb"
-          value={values.blurb}
-          onChange={(event) => {
-            const text = event.target.value;
-            setValues((values) => ({
-              ...values,
-              blurb: text,
-            }));
-          }}
-        />
-      </div>
-      <div className="flex flex-col">
-        <p className="mb-4 text-left font-medium">Publishing to: <span className="font-bold">{user}</span></p>
-        <p className="text-left mb-3 text-base font-medium text-[#808080]">Add or change topics (up to 5) so readers know what your story is about</p>
-        <Dropdown
-          className="border-2 text-left"
-          placeholder={'Add a topic...'}
-          options={options}
-          value={values.category}
-          onChange={(option) => {
-            setValues((values) => ({
-              ...values,
-              category: option.value,
-            }));
-          }}
-        />
-        <p className="text-left mt-4"><span className="font-medium ">Note:</span> Changes here will affect how your story appears to the public</p>
-        <input type="submit" value={'Publish now'} className="bg-[#FF86A5] max-w-[25%] py-2 px-4 mt-10 rounded-full text-white" disabled={inFlight || !submitReady()} />
-      </div>
+        <div className="flex flex-col">
+          <p className="mb-4 text-left font-medium">
+            Publishing to: <span className="font-bold">{user}</span>
+          </p>
+          <p className="text-left mb-3 text-base font-medium text-[#808080]">
+            Add or change topics (up to 5) so readers know what your story is
+            about
+          </p>
+          <Dropdown
+            className="border-2 text-left"
+            placeholder={"Add a topic..."}
+            options={options}
+            value={values.category}
+            onChange={(option) => {
+              setValues((values) => ({
+                ...values,
+                category: option.value,
+              }));
+            }}
+          />
+          <p className="text-left mt-4">
+            <span className="font-medium ">Note:</span> Changes here will affect
+            how your story appears to the public
+          </p>
+          <input
+            type="submit"
+            value={"Publish now"}
+            className="
+        bg-[#FF86A5] max-w-[25%] py-2 px-4 mt-10 rounded-full text-white"
+            disabled={inFlight || !submitReady()}
+          />
+        </div>
       </form>
     </div>
   );

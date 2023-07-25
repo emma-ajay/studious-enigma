@@ -4,7 +4,7 @@ import { Link, redirect, useNavigate } from "react-router-dom";
 import { API } from "../../../controllers/API";
 
 type Props = {
-  content: string;
+  content: string | null;
 };
 
 const currentDate = new Date();
@@ -15,22 +15,6 @@ export const PublishButton = ({ content }: Props) => {
   const handleClick = (event: any) => {
     event.preventDefault();
     setInFlight(true);
-    // axios
-    //   .post(
-    //     "https://multi.serveo.net/api/v1/post",
-    //     {
-    //       content: content.toString(),
-    //       createdDate: currentDate.getTime().toString(),
-    //     },
-    //     {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //         Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjg5NjgyODEwLCJleHAiOjE2OTAyODc2MTB9.60PdUb82C0r3IrEiG2sYhRbKhN2o_ajrQsjZ23bhAKX_cvA0fLGkV6F5oj7ehcE8O4gC-VUtkGzj_lscFOboCw`,
-    //         "Access-Control-Allow-Origin": "*",
-    //         "Access-Control-Allow-Methods": "GET, OPTIONS, POST, PUT",
-    //       },
-    //     }
-    //   )
     API.post(`/api/v1/post`, {
       content: content,
       createdDate: currentDate.getTime().toString(),
@@ -51,8 +35,12 @@ export const PublishButton = ({ content }: Props) => {
   return (
     <div>
       {/* <Link to={"/publish"}> */}
-      <button onClick={handleClick} disabled={inFlight}>
-        PUBLISH
+      <button
+        onClick={handleClick}
+        disabled={inFlight}
+        className="bg-[#FF86A5] py-2 px-4 mt-10 mx-3 rounded-full text-white"
+      >
+        Publish
       </button>
       {/* </Link> */}
     </div>
