@@ -110,7 +110,6 @@ function MyEditor() {
   };
 
   const hideContext = () => {
-    console.log("fre");
     setShowContext(false);
   };
 
