@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { Link, redirect, useNavigate, useParams } from "react-router-dom";
 import { API } from "../../../controllers/API";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type Props = {
   content: string | null;
@@ -13,7 +15,33 @@ export const PublishButton = ({ content }: Props) => {
   const [inFlight, setInFlight] = useState<boolean>(false);
   const [file, setFile] = useState<string>();
   const navigate = useNavigate();
+  const notify = () => {
+    toast("Default Notification !");
+
+    toast.success("Success Notification !", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+
+    toast.error("Error Notification !", {
+      position: toast.POSITION.TOP_LEFT,
+    });
+
+    toast.warn("Warning Notification !", {
+      position: toast.POSITION.BOTTOM_LEFT,
+    });
+
+    toast.info("Info Notification !", {
+      position: toast.POSITION.BOTTOM_CENTER,
+    });
+
+    toast("Custom Style Notification with css class!", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      className: "foo-bar",
+    });
+  };
+
   const handleClick = (event: any) => {
+    draftId ? console.log("on you") : console.log("never");
     event.preventDefault();
     setInFlight(true);
     draftId
@@ -46,6 +74,9 @@ export const PublishButton = ({ content }: Props) => {
           .catch((err) => {
             setInFlight(false);
             console.log(err);
+            toast.error(err.response.data.message, {
+              position: toast.POSITION.BOTTOM_RIGHT,
+            });
           });
   };
 
@@ -57,8 +88,9 @@ export const PublishButton = ({ content }: Props) => {
         disabled={inFlight}
         className="bg-[#FF86A5] py-2 px-4 mt-10 mx-3 rounded-full text-white"
       >
-        Publish
+        {inFlight ? "Loading..." : "Publish"}
       </button>
+      <ToastContainer />
       {/* </Link> */}
     </div>
   );

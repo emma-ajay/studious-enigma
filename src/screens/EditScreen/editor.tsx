@@ -12,6 +12,8 @@ import axios from "axios";
 import { DomEditor } from "@wangeditor/editor";
 import { i18nChangeLanguage } from "@wangeditor/editor";
 import { UploadAPI } from "../../controllers/API";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Switch language - 'en' or 'zh-CN'
 
@@ -24,7 +26,6 @@ function MyEditor() {
   const [editor, setEditor] = useState<IDomEditor | null>(null);
 
   const toolbar = DomEditor.getToolbar(editor as IDomEditor);
-  console.log("message", toolbar?.getConfig().toolbarKeys);
 
   // TS syntax
   //   // const [editor, setEditor] = useState(null)                  // JS syntax
@@ -89,7 +90,12 @@ function MyEditor() {
           .then((response) => {
             setHtml(response.data);
           })
-          .catch((error) => console.log(error));
+          .catch((error) => {
+            console.log(error);
+            toast.error(error.response.data.message, {
+              position: toast.POSITION.TOP_CENTER,
+            });
+          });
       });
     }
     return () => {
@@ -121,6 +127,7 @@ function MyEditor() {
         <PublishButton content={html} />
         <DraftButton content={html} />
       </div>
+      <ToastContainer />
       {/* <div style={{ marginTop: "15px" }}>{html}</div> */}
     </>
   );

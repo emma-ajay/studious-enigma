@@ -4,6 +4,7 @@ import { API } from "../../../controllers/API";
 import { useNavigate } from "react-router";
 import { string } from "prop-types";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 type Props = {
   content: string;
@@ -27,6 +28,9 @@ export const DraftButton = ({ content }: Props) => {
       })
       .catch((error) => {
         console.log(error);
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
       })
       .finally(() => {
         setInFlight(false);
@@ -41,6 +45,7 @@ export const DraftButton = ({ content }: Props) => {
       >
         Save Draft
       </button>
+      <ToastContainer />
     </div>
   );
 };

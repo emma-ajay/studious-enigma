@@ -7,6 +7,7 @@ import "react-dropdown/style.css";
 import axios from "axios";
 import { useParams } from "react-router";
 import { UploadAPI } from "../../../controllers/API";
+import { ToastContainer, toast } from "react-toastify";
 
 interface IPublishFormValues {
   thumbnail: any;
@@ -71,9 +72,18 @@ export const PublishForm = () => {
     formData.set("publishedDate", currentDate.getTime().toString());
     const response = UploadAPI.post(`/api/v1/publish/${postId}/post`, formData)
       .then((response) => {
+        toast.success("Post Published!", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        //don't forget to set a timeout before routing to allposts
         console.log(response);
       })
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        toast.error(error.response.data.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+        console.log(error);
+      })
       .finally(() => setInFlight(false));
   };
   return (
@@ -167,6 +177,7 @@ export const PublishForm = () => {
           />
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };
