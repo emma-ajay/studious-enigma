@@ -29,3 +29,11 @@ export const AuthAPI = axios.create({
     "Access-Control-Allow-Origin": "*",
   },
 });
+
+export const deleteAPI = axios.create({
+  baseURL: url,
+  headers: {
+    Authorization: `Bearer ${data}`,
+    "Access-Control-Allow-Origin": "*",
+  },
+});
