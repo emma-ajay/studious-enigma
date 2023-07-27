@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { Link, redirect, useNavigate, useParams } from "react-router-dom";
 import { API } from "../../../controllers/API";
 
 type Props = {
@@ -9,27 +9,44 @@ type Props = {
 
 const currentDate = new Date();
 export const PublishButton = ({ content }: Props) => {
+  const { draftId } = useParams();
   const [inFlight, setInFlight] = useState<boolean>(false);
   const [file, setFile] = useState<string>();
   const navigate = useNavigate();
   const handleClick = (event: any) => {
     event.preventDefault();
     setInFlight(true);
-    API.post(`/api/v1/post`, {
-      content: content,
-      createdDate: currentDate.getTime().toString(),
-    })
-      .then((response) => {
-        console.log(response);
-        //@ts-expect-error
-        setFile(true);
-        setInFlight(false);
-        navigate(`/publish/${response.data.object.postId}`);
-      })
-      .catch((err) => {
-        setInFlight(false);
-        console.log(err);
-      });
+    draftId
+      ? API.post(`/api/v1/post?draftId=${draftId}`, {
+          content: content,
+          createdDate: currentDate.getTime().toString(),
+        })
+          .then((response) => {
+            console.log(response);
+            //@ts-expect-error
+            setFile(true);
+            setInFlight(false);
+            navigate(`/publish/${response.data.object.postId}`);
+          })
+          .catch((err) => {
+            setInFlight(false);
+            console.log(err);
+          })
+      : API.post(`/api/v1/post`, {
+          content: content,
+          createdDate: currentDate.getTime().toString(),
+        })
+          .then((response) => {
+            console.log(response);
+            //@ts-expect-error
+            setFile(true);
+            setInFlight(false);
+            navigate(`/publish/${response.data.object.postId}`);
+          })
+          .catch((err) => {
+            setInFlight(false);
+            console.log(err);
+          });
   };
 
   return (
