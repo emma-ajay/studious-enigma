@@ -69,14 +69,7 @@ function MyEditor() {
       const formData = new FormData();
       formData.append("image", file);
       // upload images yourself, and get image's url, alt, href
-      const response = await UploadAPI.post("/api/v1/image", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjg5NjgyODEwLCJleHAiOjE2OTAyODc2MTB9.60PdUb82C0r3IrEiG2sYhRbKhN2o_ajrQsjZ23bhAKX_cvA0fLGkV6F5oj7ehcE8O4gC-VUtkGzj_lscFOboCw`,
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, OPTIONS, POST, PUT",
-        },
-      });
+      const response = await UploadAPI.post("/api/v1/image", formData, {});
       // insert image
       insertFn(
         response.data.object.imageUrl,

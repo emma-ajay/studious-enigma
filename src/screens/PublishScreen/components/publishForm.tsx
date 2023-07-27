@@ -69,18 +69,7 @@ export const PublishForm = () => {
     event.preventDefault();
     setInFlight(true);
     formData.set("publishedDate", currentDate.getTime().toString());
-    const response = UploadAPI.post(
-      `/api/v1/publish/${postId}/post`,
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjg5NjgyODEwLCJleHAiOjE2OTAyODc2MTB9.60PdUb82C0r3IrEiG2sYhRbKhN2o_ajrQsjZ23bhAKX_cvA0fLGkV6F5oj7ehcE8O4gC-VUtkGzj_lscFOboCw`,
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, OPTIONS, POST, PUT",
-        },
-      }
-    )
+    const response = UploadAPI.post(`/api/v1/publish/${postId}/post`, formData)
       .then((response) => {
         console.log(response);
       })
@@ -173,7 +162,7 @@ export const PublishForm = () => {
             type="submit"
             value={"Publish now"}
             className="
-        bg-[#FF86A5] max-w-[25%] py-2 px-4 mt-10 rounded-full text-white"
+        bg-[#FF86A5] max-w-[25%] py-2 mt-10 rounded-full text-white"
             disabled={inFlight || !submitReady()}
           />
         </div>

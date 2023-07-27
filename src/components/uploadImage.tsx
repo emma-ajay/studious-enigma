@@ -24,14 +24,7 @@ export const ImageUploader = ({
   const handleUploadChange = async (image: any) => {
     const formData = new FormData();
     formData.append("image", image);
-    const response = UploadAPI.post("/api/v1/image", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjg5NjgyODEwLCJleHAiOjE2OTAyODc2MTB9.60PdUb82C0r3IrEiG2sYhRbKhN2o_ajrQsjZ23bhAKX_cvA0fLGkV6F5oj7ehcE8O4gC-VUtkGzj_lscFOboCw`,
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, OPTIONS, POST, PUT",
-      },
-    })
+    const response = UploadAPI.post("/api/v1/image", formData)
       .then((response) => {
         appendImage ? appendImage(response.data.object.imageUrl) : null;
       })
