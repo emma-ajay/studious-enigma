@@ -9,6 +9,8 @@ import { DraftScreen } from "./screens/DraftScreen";
 import { SignUp } from "./screens/Account/SignUp";
 import { Otp } from "./screens/Account/SignUp/Otp";
 import { Login } from "./screens/Account/LogIn";
+import { AllPosts } from "./screens/AllPosts";
+import { MyPosts } from "./screens/MyPosts";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +28,14 @@ const router = createBrowserRouter([
       {
         path: "/drafts",
         element: <DraftScreen />,
+      },
+      {
+        path: "/allposts",
+        element: <AllPosts />,
+      },
+      {
+        path: "myposts",
+        element: <MyPosts />,
       },
     ],
   },

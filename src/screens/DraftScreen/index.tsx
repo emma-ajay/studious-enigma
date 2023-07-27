@@ -51,21 +51,24 @@ export const DraftScreen = () => {
         />
       ))}
       <ReactPaginate
-        previousLabel={"<<"}
-        nextLabel={">>"}
-        breakLabel={"..."}
         pageCount={totalPages}
         onPageChange={handlePageChange}
+        previousLabel={"< Previous"}
+        nextLabel={"Next >"}
+        breakLabel={"..."}
         marginPagesDisplayed={2}
         pageRangeDisplayed={3}
-        containerClassName={"pagination justify-content-end pb-5 mt-5"}
+        containerClassName={
+          "pagination flex items-center justify-center space-x-5 pb-2 mt-5"
+        }
+        activeClassName={"active"}
+        activeLinkClassName={"active text-white bg-[#FF86A5]"}
         pageClassName={"page-item"}
-        pageLinkClassName={"page-link"}
-        previousClassName={"page-item"}
-        nextClassName={"page-item"}
+        pageLinkClassName={"page-link p-3 rounded"}
+        previousClassName={"page-item font-semibold hover:text-[#ff86a5]"}
+        nextClassName={"page-item font-semibold hover:text-[#ff86a5]"}
         previousLinkClassName={"page-link"}
         nextLinkClassName={"page-link"}
-        activeClassName={"active"}
         breakClassName={"page-item"}
         breakLinkClassName={"page-link"}
       />
