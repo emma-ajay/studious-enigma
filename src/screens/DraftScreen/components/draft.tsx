@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { deleteAPI } from "../../../controllers/API";
 import { ToastContainer, toast } from "react-toastify";
 import { useState } from "react";
+import { TrashIcon } from "@heroicons/react/solid";
 
 export interface IDraft {
   draftId: number;
@@ -38,14 +39,22 @@ export const Draft = ({ number, draft }: Props) => {
       });
   };
   return (
-    <div className="bg-gray-500 mt-3 flex justify-between">
-      <Link to={`/edit/${draft.draftId}`}>
+    <div className="bg-[#fcfcfc] rounded-lg shadow-lg p-4 flex justify-between items-center hover:shadow-xl mt-4">
+      <Link
+        to={`/edit/${draft.draftId}`}
+        className="text-xl font-semibold text-gray-800 hover:text-[#FF86A5] transition duration-300"
+      >
         Draft {number + 1} ({modifiedDate.toDateString()})
       </Link>
       <div>
-        <button onClick={handleClick}>Delete</button>
+        <button
+          onClick={handleClick}
+          className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg"
+        >
+          <TrashIcon className="w-6 h-6" />
+        </button>
+        <ToastContainer />
       </div>
-      <ToastContainer />
     </div>
   );
 };
