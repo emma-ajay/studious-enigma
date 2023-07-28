@@ -38,6 +38,10 @@ const router = createBrowserRouter([
         path: "/myposts",
         element: <MyPosts />,
       },
+      {
+        path: "/posts/:postId",
+        element: <FileContentComponent />,
+      },
     ],
   },
   {
