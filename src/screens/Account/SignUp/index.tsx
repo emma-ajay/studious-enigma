@@ -2,7 +2,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { Input } from "../../../components/Input";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { API } from "../../../controllers/API";
 
 export const SignUp = () => {
@@ -43,7 +43,7 @@ export const SignUp = () => {
     createdDate: any;
   }) => {
     API.post(`/api/v1/auth/register/creator`, values)
-      .then((response) => {
+      .then(() => {
         navigate(`/accounts/otp`);
       })
       .catch((error) => console.log(error));
@@ -60,27 +60,24 @@ export const SignUp = () => {
         {(formikProps) => {
           return (
             <Form>
-              <Input name="name" label="Name:" type="text" required />
-              <Input name="username" label="Username:" type="text" required />
-              <Input name="email" label="Email:" type="text" required />
+              <Input name="name" label="Name:" type="text" required placeholder={""} />
+              <Input name="username" label="Username:" type="text" required placeholder={""} />
+              <Input name="email" label="Email:" type="text" required placeholder={""} />
               <Input
                 name="phoneNumber"
                 label="Phone Number:"
                 type="text"
-                required
-              />
+                required placeholder={""}              />
               <Input
                 name="password"
                 label="Password:"
                 type="password"
-                required
-              />
+                required placeholder={""}              />
               <Input
                 name="confirmPassword"
                 label="Confirm Password:"
                 type="password"
-                required
-              />
+                required placeholder={""}              />
               <button
                 disabled={formikProps.isSubmitting}
                 type="submit"
