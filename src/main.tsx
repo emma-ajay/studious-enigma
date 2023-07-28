@@ -11,6 +11,7 @@ import { Otp } from "./screens/Account/SignUp/Otp";
 import { Login } from "./screens/Account/LogIn";
 import { AllPosts } from "./screens/AllPosts";
 import { MyPosts } from "./screens/MyPosts";
+import { FileContentComponent } from "./screens/Blog";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "myposts",
         element: <MyPosts />,
+      },
+      {
+        path: "/posts/:postId",
+        element: <FileContentComponent />,
       },
     ],
   },

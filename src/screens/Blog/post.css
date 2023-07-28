@@ -1,0 +1,51 @@
+.post img {
+    max-width: 100%;
+    margin: 2rem auto 0;
+    /* display: inline; */
+}
+
+.post>p,
+.post>ul,
+.post>h1,
+.post>h2,
+.post>blockquote,
+.post>code,
+.post>pre,
+.post>div {
+    margin-top: 2rem;
+}
+
+.post>h1 {
+    font-weight: 700;
+    font-size: larger;
+}
+
+ul li {
+    margin-top: 0.5rem;
+}
+
+pre {
+    background-color: #d2d2d2;
+    word-wrap: break-word;
+    padding: 2rem;
+}
+
+code {
+    background-color: #d2d2d2;
+    padding: 1px;
+    border-radius: 5px;
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    display: inline;
+    /* page-break-inside: auto; */
+}
+
+p {
+    width: 100%;
+}
+
+blockquote {
+    padding-left: 10px;
+    border-left: 5px solid #FF86A5;
+    border-radius: 2px;
+}

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export type IPost = {
   postCoverId: number;
@@ -16,8 +16,15 @@ type Props = {
 };
 
 export const Post = ({ post }: Props) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/posts/${post.postId}`);
+  };
   return (
-    <div className="newsreader hover:shadow-lg duration-300 flex flex-col items-start justify-between h-[500px] border-[1px] border-gray-200 p-4 rounded-lg">
+    <div
+      className="newsreader hover:shadow-lg duration-300 flex flex-col items-start justify-between h-[500px] border-[1px] border-gray-200 p-4 rounded-lg"
+      onClick={handleClick}
+    >
       {/* <div className=' w-full flex items-center'> */}
       <img
         src={post.thumbnailUrl}
