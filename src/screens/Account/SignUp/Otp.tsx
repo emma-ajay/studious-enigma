@@ -1,7 +1,5 @@
-import { Input } from "../../../components/Input";
-import { Form, Formik } from "formik";
 import { useState } from "react";
-import { Navigate, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { API } from "../../../controllers/API";
 
 export const Otp = () => {

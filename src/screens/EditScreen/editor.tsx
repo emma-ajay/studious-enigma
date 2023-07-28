@@ -1,12 +1,14 @@
+//@ts-nocheck
+
 import "@wangeditor/editor/dist/css/style.css"; // import css
 
 import { useState, useEffect } from "react";
 import { Editor, Toolbar } from "@wangeditor/editor-for-react";
 import { IDomEditor, IEditorConfig, IToolbarConfig } from "@wangeditor/editor";
-import { ImageUploader } from "../../components/uploadImage";
+
 import { DraftButton } from "./components/saveDraft";
 import { PublishButton } from "./components/postPublisher";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { API } from "../../controllers/API";
 import axios from "axios";
 import { DomEditor } from "@wangeditor/editor";
@@ -25,7 +27,7 @@ function MyEditor() {
   // editor instance
   const [editor, setEditor] = useState<IDomEditor | null>(null);
 
-  const toolbar = DomEditor.getToolbar(editor as IDomEditor);
+  //   const toolbar = DomEditor.getToolbar(editor as IDomEditor);
 
   // TS syntax
   //   // const [editor, setEditor] = useState(null)                  // JS syntax
@@ -34,10 +36,10 @@ function MyEditor() {
   const [html, setHtml] = useState(() => (draftId ? null : "<p>hello</p>"));
 
   // Simulate ajax async set html
-  const appendImage = (url: string) => {
-    const srcLink = `<img src="${url}" alt="someAlt" data-href="jb" style=""/>`;
-    editor?.dangerouslyInsertHtml(srcLink);
-  };
+  //   const appendImage = (url: string) => {
+  //     const srcLink = `<img src="${url}" alt="someAlt" data-href="jb" style=""/>`;
+  //     editor?.dangerouslyInsertHtml(srcLink);
+  //   };
 
   // change `uploadImage` menu config
 
@@ -116,6 +118,7 @@ function MyEditor() {
         />
         <Editor
           defaultConfig={editorConfig}
+          //@ts-ignore
           value={html}
           onCreated={setEditor}
           onChange={(editor) => setHtml(editor.getHtml())}

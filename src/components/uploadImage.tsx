@@ -1,6 +1,5 @@
 // import React from "react";
 import { FileUploader } from "react-drag-drop-files";
-import axios from "axios";
 import { UploadAPI } from "../controllers/API";
 
 const fileTypes = ["JPG", "PNG", "GIF", "JPEG", "TIF"];
@@ -24,7 +23,7 @@ export const ImageUploader = ({
   const handleUploadChange = async (image: any) => {
     const formData = new FormData();
     formData.append("image", image);
-    const response = UploadAPI.post("/api/v1/image", formData)
+    UploadAPI.post("/api/v1/image", formData)
       .then((response) => {
         appendImage ? appendImage(response.data.object.imageUrl) : null;
       })

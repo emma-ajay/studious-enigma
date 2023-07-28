@@ -1,6 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
-import { Link, redirect, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../../../controllers/API";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,30 +14,6 @@ export const PublishButton = ({ content }: Props) => {
   const [inFlight, setInFlight] = useState<boolean>(false);
   const [file, setFile] = useState<string>();
   const navigate = useNavigate();
-  const notify = () => {
-    toast("Default Notification !");
-
-    toast.success("Success Notification !", {
-      position: toast.POSITION.TOP_CENTER,
-    });
-
-    toast.error("Error Notification !", {
-      position: toast.POSITION.TOP_LEFT,
-    });
-
-    toast.warn("Warning Notification !", {
-      position: toast.POSITION.BOTTOM_LEFT,
-    });
-
-    toast.info("Info Notification !", {
-      position: toast.POSITION.BOTTOM_CENTER,
-    });
-
-    toast("Custom Style Notification with css class!", {
-      position: toast.POSITION.BOTTOM_RIGHT,
-      className: "foo-bar",
-    });
-  };
 
   const handleClick = (event: any) => {
     draftId ? console.log("on you") : console.log("never");
@@ -53,6 +28,7 @@ export const PublishButton = ({ content }: Props) => {
             console.log(response);
             //@ts-expect-error
             setFile(true);
+            console.log(file);
             setInFlight(false);
             navigate(`/publish/${response.data.object.postId}`);
           })

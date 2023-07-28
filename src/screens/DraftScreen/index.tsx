@@ -35,7 +35,7 @@ export const DraftScreen = () => {
   const handlePageChange = (data: { selected: number }) => {
     console.log("df");
     getPages(data.selected)
-      .then((page) => {
+      .then(() => {
         // setDrafts(page);
       })
       .catch((err) => console.log(err));

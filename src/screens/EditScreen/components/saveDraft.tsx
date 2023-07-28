@@ -1,8 +1,6 @@
 // import React from "react";
-import axios from "axios";
 import { API } from "../../../controllers/API";
 import { useNavigate } from "react-router";
-import { string } from "prop-types";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 

@@ -1,10 +1,7 @@
 import { useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import { any, string } from "prop-types";
 import { ImageUploader } from "../../../components/uploadImage";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
-import axios from "axios";
 import { useParams } from "react-router";
 import { UploadAPI } from "../../../controllers/API";
 import { ToastContainer, toast } from "react-toastify";
@@ -34,6 +31,7 @@ export const PublishForm = () => {
   });
   const currentDate = new Date();
 
+  //@ts-ignore
   const user: string | null = JSON.parse(localStorage.getItem("UserName"));
 
   const submitReady = () => {
@@ -72,7 +70,7 @@ export const PublishForm = () => {
     event.preventDefault();
     setInFlight(true);
     formData.set("publishedDate", currentDate.getTime().toString());
-    const response = UploadAPI.post(`/api/v1/publish/${postId}/post`, formData)
+    UploadAPI.post(`/api/v1/publish/${postId}/post`, formData)
       .then((response) => {
         toast.success("Post Published!", {
           position: toast.POSITION.TOP_CENTER,

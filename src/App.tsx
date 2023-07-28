@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import { Outlet, useNavigate } from "react-router";
 import { Navbar } from "./components/Navbar";
+import { Footer } from "./components/Footer";
 
 export default function App() {
   //   const [baseArray, setBaseArray] = useState<Base[]>([
@@ -21,10 +22,12 @@ export default function App() {
       navigate("/login");
     }
   }, [navigate]);
+  navigate(`/allposts`);
   return (
     <div>
       <Navbar />
       <Outlet />
+      <Footer />
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TrashIcon } from "@heroicons/react/solid";
 import { deleteAPI } from "../../../controllers/API";
 
 export type IPost = {

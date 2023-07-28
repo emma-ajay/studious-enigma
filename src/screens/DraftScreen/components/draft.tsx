@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { deleteAPI } from "../../../controllers/API";
 import { ToastContainer, toast } from "react-toastify";
-import { useState } from "react";
 import { TrashIcon } from "@heroicons/react/solid";
 
 export interface IDraft {
@@ -19,7 +18,7 @@ type Props = {
 
 export const Draft = ({ number, draft }: Props) => {
   const modifiedDate = new Date(parseInt(draft.lastModifiedDate));
-  const [inFlight, setInFlight] = useState<boolean>(false);
+  //   const [inFlight, setInFlight] = useState<boolean>(false);
   console.log(modifiedDate);
   const handleClick = () => {
     console.log(draft.draftId);

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
-import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { API } from "../../controllers/API";
 import { MyPost } from "./components/MyPost";
