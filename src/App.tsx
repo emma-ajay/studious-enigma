@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import { Outlet, useNavigate } from "react-router";
+import { Navbar } from "./components/Navbar";
 
 export default function App() {
   //   const [baseArray, setBaseArray] = useState<Base[]>([
@@ -22,7 +23,7 @@ export default function App() {
   }, [navigate]);
   return (
     <div>
-      <p>"An application"</p>
+      <Navbar />
       <Outlet />
     </div>
   );

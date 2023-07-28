@@ -35,12 +35,8 @@ const router = createBrowserRouter([
         element: <AllPosts />,
       },
       {
-        path: "myposts",
+        path: "/myposts",
         element: <MyPosts />,
-      },
-      {
-        path: "/posts/:postId",
-        element: <FileContentComponent />,
       },
     ],
   },

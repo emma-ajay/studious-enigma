@@ -1,0 +1,6 @@
+.active-link {
+    color: #FF86A5;
+    /* Set your desired active link color */
+    font-weight: bold;
+    /* Add any other styling you want for active links */
+}
