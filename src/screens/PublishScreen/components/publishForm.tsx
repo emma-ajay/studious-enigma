@@ -8,6 +8,7 @@ import axios from "axios";
 import { useParams } from "react-router";
 import { UploadAPI } from "../../../controllers/API";
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 interface IPublishFormValues {
   thumbnail: any;
@@ -20,6 +21,7 @@ interface IPublishFormValues {
 const formData = new FormData();
 export const PublishForm = () => {
   const { postId } = useParams();
+  const navigate = useNavigate();
   const [file, setFile] = useState<string>("");
   const [inFlight, setInFlight] = useState<boolean>(false);
   const [values, setValues] = useState<IPublishFormValues>({
@@ -76,6 +78,8 @@ export const PublishForm = () => {
           position: toast.POSITION.TOP_CENTER,
         });
         //don't forget to set a timeout before routing to allposts
+        setTimeout(() => navigate(`/allposts`), 2000);
+
         console.log(response);
       })
       .catch((error) => {

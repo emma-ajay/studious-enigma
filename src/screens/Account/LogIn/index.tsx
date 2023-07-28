@@ -39,7 +39,7 @@ export const Login = () => {
           "UserName",
           JSON.stringify(response.data.profile.name)
         );
-        navigate("/");
+        navigate("/allposts");
         window.location.reload();
       })
       .catch((error) => console.log(error));
