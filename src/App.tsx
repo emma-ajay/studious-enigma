@@ -19,12 +19,11 @@ export default function App() {
       : true;
 
     if (!token || tokenExpired) {
-      navigate("/login");
+      navigate("/accounts/login");
     }
   }, [navigate]);
-  navigate(`/allposts`);
   return (
-    <div>
+    <div className="flex flex-col justify-between min-h-screen">
       <Navbar />
       <Outlet />
       <Footer />

@@ -32,7 +32,7 @@ export const Post = ({ post }: Props) => {
         className="max-w-full max-h-[75%] m-auto object-cover object-center"
       />
       {/* </div> */}
-      <div className="h-1/4">
+      <div className="h-1/4 text-left">
         <Link
           to={`/posts/${post.postId}`}
           className="inter font-medium mt-3 mb-6 block"

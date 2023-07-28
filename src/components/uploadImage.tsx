@@ -9,16 +9,14 @@ type Props = {
   handleUploadChangeProp?: (image: any) => void;
   publish?: boolean;
   hideButton?: () => void;
-  xyPosition?: {
-    x: number;
-    y: number;
-  };
+  background?: string;
 };
 export const ImageUploader = ({
   appendImage,
   handleUploadChangeProp,
   hideButton,
   publish,
+  background,
 }: Props) => {
   const handleUploadChange = async (image: any) => {
     const formData = new FormData();
@@ -45,7 +43,11 @@ export const ImageUploader = ({
         types={fileTypes}
       >
         {publish ? (
-          <div className="w-full h-[250px] bg-[#eeeeee] rounded flex flex-col justify-center mb-4">
+          <div
+            className={`w-full h-[250px]  ${
+              background ? background : "bg-[#eeeeee]"
+            }rounded flex flex-col justify-center mb-4`}
+          >
             <p className="mx-auto mb-1">Click to Upload Image</p>
             <p className="w-3/4 mx-auto text-sm text-[#828282]">
               Include a high-quality image in your story to make it more

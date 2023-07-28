@@ -76,7 +76,7 @@ export const PublishForm = () => {
           position: toast.POSITION.TOP_CENTER,
         });
         //don't forget to set a timeout before routing to allposts
-        setTimeout(() => navigate(`/allposts`), 2000);
+        setTimeout(() => navigate(`/allposts`), 1500);
 
         console.log(response);
       })
@@ -96,18 +96,27 @@ export const PublishForm = () => {
       >
         <div>
           <h1 className="font-bold mb-2 text-left text-lg">Story Preview</h1>
-          <ImageUploader
-            handleUploadChangeProp={handleImageUpload}
-            publish={true}
-          />
           {values.thumbnail ? (
-            <div className="flex flex-row items-center w-full h-full justify-center space-x-10">
-              <div className="w-1/2">
-                <img src={file} alt="" className="w-3/4" />
+            <div className="relative h-[250px] mb-8">
+              <ImageUploader
+                handleUploadChangeProp={handleImageUpload}
+                publish={true}
+                background={"#eeeeee01"}
+              />
+              <div className="absolute top-0 left-0 w-full h-full -z-10">
+                <div className="h-full">
+                  <img src={file} alt="" className="max-h-[100%] m-auto" />
+                </div>
               </div>
             </div>
           ) : (
-            <div></div>
+            <div>
+              <ImageUploader
+                handleUploadChangeProp={handleImageUpload}
+                publish={true}
+              />
+              <div></div>
+            </div>
           )}
           <input
             className="block border-b-[1px] border-[#828282] py-1 w-full mb-4 outline-none"
@@ -172,7 +181,7 @@ export const PublishForm = () => {
           </p>
           <input
             type="submit"
-            value={"Publish now"}
+            value={inFlight ? "Loading..." : "Publish Now"}
             className="
         bg-[#FF86A5] max-w-[25%] py-2 mt-10 rounded-full text-white"
             disabled={inFlight || !submitReady()}

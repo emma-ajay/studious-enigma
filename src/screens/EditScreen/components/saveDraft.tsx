@@ -41,7 +41,7 @@ export const DraftButton = ({ content }: Props) => {
         className="bg-[#FF86A5] py-2 px-4 mt-10 rounded-full text-white"
         disabled={inFlight}
       >
-        Save Draft
+        {inFlight ? "Loading..." : "Save Draft"}
       </button>
       <ToastContainer />
     </div>
