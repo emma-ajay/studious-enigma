@@ -40,7 +40,7 @@ export const Login = () => {
           JSON.stringify(response.data.profile.name)
         );
         navigate("/allposts");
-        window.location.reload();
+        // window.location.reload();
       })
       .catch((error) => console.log(error));
   };

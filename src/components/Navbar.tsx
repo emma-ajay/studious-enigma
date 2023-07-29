@@ -4,10 +4,20 @@ import "./Navbar.css";
 export const Navbar = () => {
   const location = useLocation();
 
+  const user = localStorage.getItem('UserName')
+
   // Function to determine if a segment is active based on its path
   const isSegmentActive = (path: string) => {
     return location.pathname === path;
   };
+
+  const handleLogout = () => {
+    localStorage.removeItem('UserName')
+    localStorage.removeItem('Token')
+    localStorage.removeItem('ID')
+    localStorage.removeItem('Role')
+    window.location.reload()
+  }
 
   return (
     <div className="py-3 my-6 flex flex-row items-center justify-between">
@@ -48,6 +58,7 @@ export const Navbar = () => {
               New Post
             </Link>
           </li>
+          {user && <li onClick={handleLogout} className="cursor-pointer">Log Out</li>}
         </ul>
       </div>
     </div>
